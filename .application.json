@@ -1,0 +1,16 @@
+{
+    "Functions": {
+        "getSpots": {
+            "PhysicalId": {
+                "ap-northeast-1": "cloud9-KameraLamdba-getSpots-18V48GECPJUM9"
+            }
+        },
+        "registerObject": {
+            "PhysicalId": {
+                "ap-northeast-1": "cloud9-KameraLamdba-registerObject-1RGWMV9Q79FCI"
+            }
+        }
+    },
+    "StackName": "cloud9-KameraLamdba",
+    "RestApiId": "4mmwrmhzni"
+}
