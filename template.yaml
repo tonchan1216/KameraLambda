@@ -12,10 +12,10 @@ Resources:
   registerObject:
     Type: 'AWS::Serverless::Function'
     Properties:
-      CodeUri: registerObject
+      Handler: registerObject/index.handler
       Role: 'arn:aws:iam::907616993345:role/Lamda'
   getSpots:
     Type: 'AWS::Serverless::Function'
     Properties:
-      CodeUri: getSpots
+      Handler: getSpots/index.handler
       Role: 'arn:aws:iam::907616993345:role/Lamda'
