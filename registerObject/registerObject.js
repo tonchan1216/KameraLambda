@@ -1,7 +1,7 @@
 // JavaScript File
 // Load the AWS SDK for Node.js
 var AWS = require('aws-sdk');
-// Set the region 
+// Set the region
 var dynamo = new AWS.DynamoDB.DocumentClient({
   region: 'ap-northeast-1'
 });

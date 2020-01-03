@@ -5,7 +5,7 @@ var dynamo = new AWS.DynamoDB.DocumentClient({
 
 exports.handler = (event, context, callback) => {
 var params = {
-    TableName: "demo_test",
+    TableName: "spot",
 };
 
 dynamo.scan(params, function(err, data){
