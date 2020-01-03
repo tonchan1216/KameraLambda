@@ -4,6 +4,7 @@ Description: An AWS Serverless Specification template describing your function.
 Globals:
   Function:
     Runtime: nodejs10.x
+    Handler: index.handler
     Timeout: 3
     MemorySize: 128
     Description: 'Created by SAM template'
@@ -12,11 +13,9 @@ Resources:
     Type: 'AWS::Serverless::Function'
     Properties:
       CodeUri: registerObject
-      Handler: registerObject.handler
       Role: 'arn:aws:iam::907616993345:role/Lamda'
   getSpots:
     Type: 'AWS::Serverless::Function'
     Properties:
-      CodeUri: getSpot
-      Handler: findall.handler
+      CodeUri: getSpots
       Role: 'arn:aws:iam::907616993345:role/Lamda'
