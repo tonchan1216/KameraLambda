@@ -1,15 +1,5 @@
 {
   "name": "get-spots",
   "version": "1.0.0",
-  "description": "",
-  "dependencies": {
-    "axios": "^0.18.0"
-  },
-  "scripts": {
-    "test": "mocha tests/unit/"
-  },
-  "devDependencies": {
-    "chai": "^4.2.0",
-    "mocha": "^6.1.4"
-  }
+  "description": ""
 }
