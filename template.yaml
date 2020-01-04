@@ -1,12 +1,14 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: 'AWS::Serverless-2016-10-31'
-Description: An AWS Serverless Specification template describing your function.
+Description: An AWS Serverless Specification template describing KameraYohou.
+
 Globals:
   Function:
     Runtime: nodejs10.x
     Timeout: 3
     MemorySize: 128
     Description: 'Created by SAM template'
+
 Resources:
   registerObject:
     Type: 'AWS::Serverless::Function'
@@ -20,3 +22,24 @@ Resources:
       Handler: index.handler
       CodeUri: getSpots
       Role: 'arn:aws:iam::907616993345:role/Lamda'
+
+  spot:
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+      TableName: spot
+      PrimaryKey:
+        Name: spot_id
+        Type: Number
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+  object:
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+      TableName: object
+      PrimaryKey:
+        Name: object_id
+        Type: Number
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
