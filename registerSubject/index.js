@@ -9,7 +9,7 @@ var dynamo = new AWS.DynamoDB.DocumentClient({
 exports.handler = (event, context, callback) => {
 
   var params = {
-    TableName: 'Target',
+    TableName: 'subject',
     Item: {
       'target_name': event.target_name,
       'target_id': event.target_id,

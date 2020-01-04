@@ -10,11 +10,12 @@ Globals:
     Description: 'Created by SAM template'
 
 Resources:
-  registerObject:
+  # Lambda
+  registerSubject:
     Type: 'AWS::Serverless::Function'
     Properties:
       Handler: index.handler
-      CodeUri: registerObject
+      CodeUri: registerSubject
       Role: 'arn:aws:iam::907616993345:role/Lamda'
   getSpots:
     Type: 'AWS::Serverless::Function'
@@ -23,6 +24,7 @@ Resources:
       CodeUri: getSpots
       Role: 'arn:aws:iam::907616993345:role/Lamda'
 
+  # DynamoDB
   spot:
     Type: AWS::Serverless::SimpleTable
     Properties:
@@ -33,12 +35,12 @@ Resources:
       ProvisionedThroughput:
         ReadCapacityUnits: 5
         WriteCapacityUnits: 5
-  object:
+  subject:
     Type: AWS::Serverless::SimpleTable
     Properties:
-      TableName: object
+      TableName: subject
       PrimaryKey:
-        Name: object_id
+        Name: subject_id
         Type: Number
       ProvisionedThroughput:
         ReadCapacityUnits: 5
