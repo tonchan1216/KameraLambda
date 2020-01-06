@@ -7,7 +7,6 @@ var dynamo = new AWS.DynamoDB.DocumentClient({
 });
 
 exports.handler = (event, context, callback) => {
-
   var params = {
     TableName: 'subject',
     Item: {
@@ -16,12 +15,20 @@ exports.handler = (event, context, callback) => {
     }
   };
 
-  dynamo.put(params, function(err, data) {
+  var response = {
+    "headers": {},
+    "isBase64Encoded": false
+  };
+
+  dynamo.put(params, function (err, data) {
     if (err) {
-      console.log("Error", err);
-    }
-    else {
-      console.log("Success", data);
+      console.log(err);
+      response.statusCode = 400;
+      response.body = JSON.stringify(err);
+    } else {
+      response.statusCode = 200;
+      response.body = JSON.stringify(data);
+      context.done(null, response);
     }
   });
 };
