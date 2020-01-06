@@ -10,6 +10,15 @@ Globals:
     Description: 'Created by SAM template'
 
 Resources:
+  # API Gateway
+  kameraAPI:
+    Type: AWS::Serverless::Api
+    Properties:
+      # Auth: ApiAuth
+      Name: KameraYohouAPI
+      StageName: develop
+      EndpointConfiguration: REGIONAL
+
   # Lambda
   registerSubject:
     Type: 'AWS::Serverless::Function'
@@ -17,12 +26,26 @@ Resources:
       Handler: index.handler
       CodeUri: registerSubject
       Role: 'arn:aws:iam::907616993345:role/Lamda'
+      Events:
+        putSubjectApi:
+            Type: Api
+            Properties:
+                Path: /subjects
+                Method: PUT
+                RestApiId: !Ref kameraAPI
   getSpots:
     Type: 'AWS::Serverless::Function'
     Properties:
       Handler: index.handler
       CodeUri: getSpots
       Role: 'arn:aws:iam::907616993345:role/Lamda'
+      Events:
+        getSpotApi:
+            Type: Api
+            Properties:
+                Path: /spots
+                Method: GET
+                RestApiId: !Ref kameraAPI
 
   # DynamoDB
   spot:
