@@ -11,13 +11,15 @@ Globals:
 
 Resources:
   # API Gateway
-  kameraAPI:
+  kameraApi:
     Type: AWS::Serverless::Api
     Properties:
       # Auth: ApiAuth
       Name: KameraYohouAPI
       StageName: develop
       EndpointConfiguration: REGIONAL
+      Auth:
+        ApiKeyRequired: true
 
   # Lambda
   registerSubject:
@@ -32,7 +34,7 @@ Resources:
             Properties:
                 Path: /subjects
                 Method: PUT
-                RestApiId: !Ref kameraAPI
+                RestApiId: !Ref kameraApi
   getSpots:
     Type: 'AWS::Serverless::Function'
     Properties:
@@ -45,7 +47,7 @@ Resources:
             Properties:
                 Path: /spots
                 Method: GET
-                RestApiId: !Ref kameraAPI
+                RestApiId: !Ref kameraApi
 
   # DynamoDB
   spot:
@@ -68,3 +70,34 @@ Resources:
       ProvisionedThroughput:
         ReadCapacityUnits: 5
         WriteCapacityUnits: 5
+
+  # API Key
+  FlutterApiKey:
+    Type: AWS::ApiGateway::ApiKey
+    DependsOn: kameraApi
+    Properties:
+      Name: flutter-api-key
+      Enabled: true
+      StageKeys:
+        - RestApiId: !Ref kameraApi
+          StageName: !Ref kameraApidevelopStage
+  FlutterApiUsagePlan:
+    Type: AWS::ApiGateway::UsagePlan
+    DependsOn: kameraApi
+    Properties:
+      ApiStages:
+      - ApiId: !Ref kameraApi
+        Stage: !Ref kameraApidevelopStage
+      Throttle:
+        BurstLimit: 20
+        RateLimit: 10
+      UsagePlanName: flutter-api-usage-plan
+  FlutterApiUsagePlanKey:
+    Type: AWS::ApiGateway::UsagePlanKey
+    DependsOn:
+      - FlutterApiKey
+      - FlutterApiUsagePlan
+    Properties :
+      KeyId: !Ref FlutterApiKey
+      KeyType: API_KEY
+      UsagePlanId: !Ref FlutterApiUsagePlan
