@@ -10,8 +10,8 @@ exports.handler = (event, context, callback) => {
   var params = {
     TableName: 'subject',
     Item: {
-      'target_name': event.target_name,
-      'target_id': event.target_id,
+      'subject_name': event.subject_name,
+      'subject_id': event.subject_id,
     }
   };
 
