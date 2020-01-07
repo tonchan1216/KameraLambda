@@ -33,7 +33,7 @@ Resources:
             Type: Api
             Properties:
                 Path: /subjects
-                Method: PUT
+                Method: POST
                 RestApiId: !Ref kameraApi
   getSpots:
     Type: 'AWS::Serverless::Function'

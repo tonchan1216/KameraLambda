@@ -7,11 +7,12 @@ var dynamo = new AWS.DynamoDB.DocumentClient({
 });
 
 exports.handler = (event, context, callback) => {
+  var obj = JSON.parse(event.body);
   var params = {
     TableName: 'subject',
     Item: {
-      'subject_name': event.subject_name,
-      'subject_id': event.subject_id,
+      'subject_name': Number(obj.subject_name),
+      'subject_id': obj.subject_id,
     }
   };
 
@@ -28,7 +29,7 @@ exports.handler = (event, context, callback) => {
     } else {
       response.statusCode = 200;
       response.body = JSON.stringify(data);
-      context.done(null, response);
+      context.done(null, params);
     }
   });
 };
