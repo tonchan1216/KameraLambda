@@ -22,12 +22,29 @@ Resources:
         ApiKeyRequired: true
 
   # Lambda
+  getSubjects:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: index.handler
+      CodeUri: getSubjects
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: subject
+      Events:
+        putSubjectApi:
+            Type: Api
+            Properties:
+                Path: /subjects
+                Method: GET
+                RestApiId: !Ref kameraApi
   registerSubject:
     Type: 'AWS::Serverless::Function'
     Properties:
       Handler: index.handler
       CodeUri: registerSubject
-      Role: 'arn:aws:iam::907616993345:role/Lamda'
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: subject
       Events:
         putSubjectApi:
             Type: Api
@@ -40,7 +57,9 @@ Resources:
     Properties:
       Handler: index.handler
       CodeUri: getSpots
-      Role: 'arn:aws:iam::907616993345:role/Lamda'
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: spot
       Events:
         getSpotApi:
             Type: Api
@@ -56,7 +75,7 @@ Resources:
       TableName: spot
       PrimaryKey:
         Name: spot_id
-        Type: Number
+        Type: String
       ProvisionedThroughput:
         ReadCapacityUnits: 5
         WriteCapacityUnits: 5
@@ -66,7 +85,7 @@ Resources:
       TableName: subject
       PrimaryKey:
         Name: subject_id
-        Type: Number
+        Type: String
       ProvisionedThroughput:
         ReadCapacityUnits: 5
         WriteCapacityUnits: 5
