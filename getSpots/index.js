@@ -20,7 +20,7 @@ exports.handler = (event, context, callback) => {
     } else {
       response.statusCode = 200;
       response.body = JSON.stringify(data);
-      context.done(null, response);
     }
+    context.done(null, response);
   });
 };

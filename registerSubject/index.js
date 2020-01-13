@@ -11,7 +11,7 @@ exports.handler = (event, context, callback) => {
   var params = {
     TableName: 'subject',
     Item: {
-      'subject_name': Number(obj.subject_name),
+      'subject_name': obj.subject_name,
       'subject_id': obj.subject_id,
     }
   };
@@ -28,8 +28,8 @@ exports.handler = (event, context, callback) => {
       response.body = JSON.stringify(err);
     } else {
       response.statusCode = 200;
-      response.body = JSON.stringify(data);
-      context.done(null, params);
+      response.body = JSON.stringify(params);
     }
+    context.done(null, response);
   });
 };
